@@ -65,7 +65,7 @@ def _search(prefix="latest/"):
         elif line.endswith(("dynamic", "meta-data")):
             ret[line] = _search(prefix=os.path.join(prefix, line))
         elif "=" in line:
-            key, value = line.split("=")
+            key, value = line.split("=", 1)
             ret[value] = _search(prefix=os.path.join(prefix, key))
         else:
             retdata = http.query(os.path.join(HOST, prefix, line)).get("body", None)
